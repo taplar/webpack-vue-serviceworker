@@ -1,4 +1,5 @@
 const cleanPlugin = require( 'clean-webpack-plugin' );
+const copyPlugin = require( 'copy-webpack-plugin' );
 const htmlPlugin = require( 'html-webpack-plugin' );
 const path = require( 'path' );
 const webpack = require( 'webpack' );
@@ -17,14 +18,24 @@ module.exports = {
 					{ loader: "less-loader" }
 				]
 			},
+			{
+				test: /\.js$/,
+				exclude: /(node_modules|bower_components)/,
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							presets: [ 'env' ]
+						}
+					}
+				]
+			},
 			{ test: /\.vue$/, loader: 'vue-loader' },
 			{ test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
 			{ test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
 		]
 	},
-	performance: {
-		hints: false
-	},
+	performance: { hints: false },
 	plugins: [
 		new webpack.DefinePlugin( {
 			'process.env': {
@@ -40,6 +51,11 @@ module.exports = {
 			mobile: true,
 			template: require( 'html-webpack-template' ),
 			title: 'My Application'
+		} ),
+		new copyPlugin( [ { from: './src/assets/jsons/' } ] ),
+		new workboxPlugin.InjectManifest( {
+			swSrc: './src/sw.js',
+			swDest: 'sw.js'
 		} ),
 		new workboxPlugin.GenerateSW( {
 			swDest: 'sw.js',
