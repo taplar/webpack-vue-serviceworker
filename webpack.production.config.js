@@ -52,6 +52,10 @@ module.exports = {
 			template: require( 'html-webpack-template' ),
 			title: 'My Application'
 		} ),
+		new htmlPlugin( {
+			template: './src/index.html',
+			title: 'My Application'
+		} ),
 		new copyPlugin( [ { from: './src/assets/jsons/' } ] ),
 		new workboxPlugin.InjectManifest( {
 			swSrc: './src/sw.js',

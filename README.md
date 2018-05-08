@@ -39,6 +39,9 @@ npm run-script build-production
 
 * The `entry` can be changed to be whatever javascript file is the entry file for your vue application.
 * The `htmlPlugin` creates an index.html for the application.  If this works for you, simply change the `title` for your application.
+	* There are two examples of the htmlPlugin in the configuration.  The first creates an entire html file from scratch.  The second takes an html template you give it and it injects the values into it, giving you more control over the contents of this generated page.  To injext a value into the html, such as the title, you can use the following pattern:
+		> &lt;title><%= htmlWebpackPlugin.options.title %>&lt;/title>
+	* The second method can be useful if you want to include a `manifest.json` in your index page.
 * The `copyPlugin` is used to easily copy source files into the generated `dist` directory that otherwise would be ignored by webpack.  If you do not need this, it can be removed.
 * The `workboxPlugin.InjectManifest` and `workboxPlugin.GenerateSW` plugins are used to create the service worker for the application.  If you only need to use some of the premade workbox modules then remove the `InjectManifest` and configure your service worker with `GenerateSW`.  If you need custom logic for your application, or more granular control over the service worker, instead remove the `GenerateSW` and configure the `InjectManifest` to know where your service worker file is and where it should be placed.  The `InjectManifest` will inject into your service worker script the inclusion of the workbox script as well as the precache files by default.
 
