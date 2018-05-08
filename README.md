@@ -39,7 +39,7 @@ npm run-script build-production
 
 * The `entry` can be changed to be whatever javascript file is the entry file for your vue application.
 * The `htmlPlugin` creates an index.html for the application.  If this works for you, simply change the `title` for your application.
-	* There are two examples of the htmlPlugin in the configuration.  The first creates an entire html file from scratch.  The second takes an html template you give it and it injects the values into it, giving you more control over the contents of this generated page.  To injext a value into the html, such as the title, you can use the following pattern:
+	* There are two examples of the htmlPlugin in the configuration.  The first creates an entire html file from scratch.  The second takes an html template you give it and it injects the values into it, giving you more control over the contents of this generated page.  To inject a value into the html, such as the title, you can use the following pattern:
 		> &lt;title><%= htmlWebpackPlugin.options.title %>&lt;/title>
 	* The second method can be useful if you want to include a `manifest.json` in your index page.
 * The `copyPlugin` is used to easily copy source files into the generated `dist` directory that otherwise would be ignored by webpack.  If you do not need this, it can be removed.
